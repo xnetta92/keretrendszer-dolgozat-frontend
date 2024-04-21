@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 import './App.css'
 
 function App() {
@@ -11,11 +13,17 @@ function App() {
         .catch(error => console.error(error))
     }, [])
 
+
   return (
     <div className='container'>
+      <div className='header'>
+        <h1 className='center'>Spells</h1>
+        <h2>CRUD</h2>
+        <hr className='spacer' />
+      </div>
       <div className='content'>
         <div className='row'>
-          <table>
+          <table className="table-bordered mytable rounded p-3">
             <thead>
               <tr>
                 <th>Id</th>
@@ -32,11 +40,11 @@ function App() {
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.description}</td>
-                  <td>{item.icon}</td>
+                  <td><img src={`data:image/png;base64, ${item.icon}`} alt="Icon"/></td>
                   <td>{item.power_level}</td>
                   <td>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={() => handleEdit(item.id)}>Edit</button>
+                    <button onClick={() => handleDelete(item.id)}>Delete</button>
                   </td>
                 </tr>
               ))}
